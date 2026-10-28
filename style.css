@@ -56,19 +56,8 @@ body{
     color: #2E2F3E;
 }
 .bigBtn{
-    height: 85px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #FF9F0A;
-    box-sizing: border-box;
     width: 170px;
-    cursor: pointer;
-    color: white;
     border-radius: 50px;
-    font-size: 30px;
-    font-weight: 900;
-    background-color: #2E2F3E;
 }
 .display{
     height: 20%;
