@@ -56,8 +56,12 @@ body{
     color: #2E2F3E;
 }
 .bigBtn{
-    width: 170px;
+    width: 180px;
     border-radius: 50px;
+}
+.result{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 40px;
 }
 .display{
     height: 20%;
