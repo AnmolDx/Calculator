@@ -60,7 +60,7 @@ function operate(previous, current, operator) {
                 res = Number(previous) / Number(current)
                 break;
         }
-        result.textContent += res
+        result.textContent += res.toFixed(7)
         previous = res
         temp = ""
         return res
