@@ -18,35 +18,55 @@ let current = ""
 
 let displayText = document.querySelector(".displayText")
 let result = document.querySelector(".result")
+let calcContainer = document.querySelector(".calcContainer")
+let specialMsg = document.querySelector("audio")
+let video = document.createElement("video")
 
 let btns = document.querySelectorAll(".calcBtns")
 
+function playVid(){
+    calcContainer.innerHTML = ""
+    video.src = "special-msgs/rickRoll.mp4"
+    video.controls = true;
+    video.autoplay = true;
+    video.style.width = "100vw"
+    calcContainer.appendChild(video)
+}
+
 function operate(previous, current, operator) {
     if(current == "0" && operator == "/"){
+        specialMsg.play()
+        result.textContent = "Buckle UP!!"
         
+        setTimeout(() => {
+            playVid()
+        }, 3000);
+
+
+
+        
+    }else{
+        result.textContent = ""
+        let res = 0
+        switch (operator) {
+            case "+":
+                res = Number(previous) + Number(current)
+                break;
+            case "-":
+                res = Number(previous) - Number(current)
+                break;
+            case "*":
+                res = Number(previous) * Number(current)
+                break;
+            case "/":
+                res = Number(previous) / Number(current)
+                break;
+        }
+        result.textContent += res
+        previous = res
+        temp = ""
+        return res
     }
-    result.textContent = ""
-    let res = 0
-    switch (operator) {
-        case "+":
-            res = Number(previous) + Number(current)
-            break;
-        case "-":
-            res = Number(previous) - Number(current)
-            break;
-        case "*":
-            res = Number(previous) * Number(current)
-            break;
-        case "/":
-            res = Number(previous) / Number(current)
-            break;
-    }
-    console.log("res", res)
-    result.textContent += res
-    previous = res
-    console.log("previous in oprate", previous)
-    temp = ""
-    return res
 
 
 }
