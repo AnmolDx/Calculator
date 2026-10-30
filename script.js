@@ -11,7 +11,7 @@ function divide(num1, num2) {
     return num1 / num2
 }
 
-let temp = ""
+let temp = 0
 let operator = ""
 let previous = ""
 let current = ""
@@ -24,7 +24,8 @@ let video = document.createElement("video")
 
 let btns = document.querySelectorAll(".calcBtns")
 
-function playVid(){
+displayText.textContent = 0
+function playVid() {
     calcContainer.innerHTML = ""
     video.src = "special-msgs/rickRoll.mp4"
     video.controls = true;
@@ -34,18 +35,15 @@ function playVid(){
 }
 
 function operate(previous, current, operator) {
-    if(current == "0" && operator == "/"){
+    if (current == "0" && operator == "/") {
         specialMsg.play()
         result.textContent = "Buckle UP!!"
-        
+
         setTimeout(() => {
             playVid()
         }, 3000);
 
-
-
-        
-    }else{
+    } else {
         result.textContent = ""
         let res = 0
         switch (operator) {
@@ -67,23 +65,33 @@ function operate(previous, current, operator) {
         temp = ""
         return res
     }
-
-
 }
 
 btns.forEach((btn) => {
     btn.addEventListener("click", () => {
-        if (btn.textContent == "Clear" || result.textContent != "") {
-            displayText.textContent = ""
+        if (result.textContent != "") {
+            displayText.textContent = 0
             result.textContent = ""
             previous = ""
             current = ""
             operator = ""
-            temp = ""
+            temp = 0
+            if (!(btn.textContent == "Clear" || btn.textContent == "⌫" || btn.textContent == "=")) {
+                temp += btn.textContent
+                displayText.textContent += btn.textContent
+            }
+        }
+        else if (btn.textContent == "Clear") {
+            displayText.textContent = 0
+            result.textContent = ""
+            previous = ""
+            current = ""
+            operator = ""
+            temp = 0
         }
         else if (btn.textContent == "⌫") {
-            if(previous == displayText.textContent){
-                previous = previous.slice(0,-1)
+            if (previous == displayText.textContent) {
+                previous = previous.slice(0, -1)
                 operator = ""
             }
             displayText.textContent = displayText.textContent.slice(0, -1)
@@ -101,7 +109,7 @@ btns.forEach((btn) => {
                 displayText.textContent += btn.textContent
                 temp = ""
             }
-            else if (operator != "" && current == "") {
+            else if (operator != "" && current == "" && temp != "") {//to display calculation if user press other operator
                 let updatedDisplay = operate(previous, temp, operator)
                 operator = btn.textContent
                 displayText.textContent = ""
@@ -112,30 +120,31 @@ btns.forEach((btn) => {
                 result.textContent = ""
             }
             else if (operator != "" && previous != "") { //if operator is not empty and previous too then update the operator
-                console.log("previous and operator both are not empty")
                 operator = btn.textContent
                 displayText.textContent = displayText.textContent.slice(0, -1)
                 displayText.textContent += btn.textContent
             }
-            else {
-                console.log("something went wrong")
-            }
         }
         else if (btn.textContent == "=") {
-            if(previous != ""){
+            if (previous != "") {
                 current += temp //second value is taken from user
                 operate(previous, current, operator)
             }
+        } else if (btn.textContent == ".") {
+            if (!(temp.includes("."))) {
+                temp += btn.textContent
+                displayText.textContent += btn.textContent
+            }
         }
-        else {
+        else if(temp == 0 && displayText.textContent == 0){
+            temp = ""
+            displayText.textContent = ""
+            temp += btn.textContent
+            displayText.textContent += btn.textContent
+        }else{
             temp += btn.textContent
             displayText.textContent += btn.textContent
         }
-        console.log("temp", temp)
-        console.log("operator", operator)
-        console.log("pre", previous)
-        console.log("curr", current)
-
     })
 })
 
