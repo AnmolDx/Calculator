@@ -76,5 +76,15 @@ body{
     box-sizing: border-box;
     border-radius: 20px 20px 0px 0px;
     border-bottom: 1px solid ;
-
+}
+.footer{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+h1{
+    position: absolute;
+    top: 5vh;
+    font-size: 40px;
 }

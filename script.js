@@ -41,7 +41,7 @@ function operate(previous, current, operator) {
 
         setTimeout(() => {
             playVid()
-        }, 3000);
+        }, 3200);
 
     } else {
         result.textContent = ""
@@ -60,7 +60,7 @@ function operate(previous, current, operator) {
                 res = Number(previous) / Number(current)
                 break;
         }
-        result.textContent += res.toFixed(7)
+        result.textContent += Number(res.toFixed(7))
         previous = res
         temp = ""
         return res
@@ -147,6 +147,3 @@ btns.forEach((btn) => {
         }
     })
 })
-
-
-// operate(parseInt(num1), operator, parseInt(num2))
